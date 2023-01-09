@@ -1,10 +1,11 @@
 import javax.swing.*;
+import javax.swing.plaf.metal.MetalButtonUI;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Random;
 
-class JSeatView {
+class JSeatView extends JPanel {
     public JSeatView(String msg) {
         String font = "Roboto";
         final int[] fontSize = {12};
@@ -24,11 +25,12 @@ class JSeatView {
         JPanel panel_2 = new JPanel();
         JPanel seatPanel = new JPanel();
         JLabel seatInfo = new JLabel("seat info");
-        panel_2.setBackground(Color.blue);
+        panel_2.setBackground(Color.green);
 //        panel_2.setBounds(12, 10, 150, 200);
         seatPanel.add(seatInfo);
         seatPanel.add(panel_2);
         panel_2.setLayout(null);
+        seatPanel.setSize(400, 600);
         seatPanel.setVisible(true);
         jf.add(panel_2, BorderLayout.CENTER);
 
@@ -77,8 +79,8 @@ class JSeatView {
         for (int j = 0; j < 12; j++) {
             for (int i = 0; i < 12; i++) {
                 JCheckBox chkBox = new JCheckBox("");
-//                chkBox.setBackground(Color.WHITE);
-//                chkBox.setForeground(Color.WHITE);
+                chkBox.setBackground(Color.WHITE);
+                chkBox.setForeground(Color.WHITE);
                 chkBox.setBounds(61 + (i * 22), 72 + (j * 20), 22, 15);
                 char seatLetter= (char) (j + 65);
                 chkBox.setText(seatLetter + "," + Integer.toString(i + 1));
@@ -86,6 +88,7 @@ class JSeatView {
                 Random random = new Random();
                 int n = random.nextInt(20);
                 if(n == i) {
+                    chkBox.setText("X");
                     chkBox.setEnabled(false);
                 }
                 seats[j][i] = chkBox;

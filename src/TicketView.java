@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -38,9 +39,20 @@ public class TicketView {
 
         ImageIcon icon = new ImageIcon("./src/images/Avatar.jpg");
         Image img = icon.getImage();
-        Image changeImage = img.getScaledInstance(200, 300, Image.SCALE_SMOOTH);
+        Image changeImage = img.getScaledInstance(350, 500, Image.SCALE_SMOOTH);
         ImageIcon changeIcon = new ImageIcon(changeImage);
         poster.setIcon(changeIcon);
+
+
+        /*FEAT: thread clock*/
+        JPanel timePanel = new JPanel();
+        JLabel timeLabel = new JLabel();
+        JLabel timeText = new JLabel();
+        timeText.setText("Current time");
+        timeText.setForeground(Color.blue);
+        timeText.setFont(new Font("Roboto", Font.BOLD,30));
+        ThreadClock threadClock = new ThreadClock(timeLabel);
+        threadClock.start();
 
         titleTimePanel.add(movieComboBox);
         titleTimePanel.add(timeComboBox);
@@ -49,18 +61,22 @@ public class TicketView {
         btnPanel.add(decreaseFont);
         posterPanel.add(poster);
 //        seatsPanel.add(seats);
+        timePanel.add(timeText);
+        timePanel.add(timeLabel);
+        timePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 
         jf.add(titleTimePanel, BorderLayout.NORTH);
         jf.add(btnPanel, BorderLayout.SOUTH);
         jf.add(posterPanel, BorderLayout.WEST);
-
-
-
+        jf.add(timePanel, BorderLayout.CENTER);
 
         jf.setSize(800, 600);
         jf.setLocation(300, 150);
         jf.setVisible(true);
 
+
+        //ActionListener
         movieComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,9 +90,11 @@ public class TicketView {
             }
         });
 
+        //close movie ticket view and open seats view
         viewSeats.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jf.dispose();
                 new JSeatView("View Seats");
             }
         });
