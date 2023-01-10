@@ -13,8 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
         JFrame jf = new JFrame("SMU Cinema");
-        JButton movieBtn = new JButton("Buy Movie Ticket");
-        JButton popcornBtn = new JButton("Buy Popcorn");
+        JButton movieBtn = new JButton();
+        JButton popcornBtn = new JButton();
 
         ImageIcon movieIcon = new ImageIcon("./src/images/movie.jpg");
         ImageIcon popcornIcon = new ImageIcon("./src/images/popcorn.jpg");
@@ -29,7 +29,7 @@ public class Main {
         jf.setLayout(new GridLayout(1, 2));
         jf.add(movieBtn);
         jf.add(popcornBtn);
-        jf.setSize(800, 600);
+        jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jf.setLocationRelativeTo(null);
         jf.setVisible(true);
 
@@ -44,7 +44,7 @@ public class Main {
         popcornBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PopcornView("Buy Popcorn!");
+                new PopcornView();
             }
         });
 
